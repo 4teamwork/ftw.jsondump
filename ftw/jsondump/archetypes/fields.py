@@ -16,11 +16,10 @@ class ArchetypFieldsPartial(object):
         self.request = request
 
     def __call__(self, config):
-
         data = {}
-
-        for name, field in self.context.Schema().items():
+        for field in self.context.Schema().fields():
             getMultiAdapter((self.context, self.request, field),
-                            IFieldExtractor).extract(name, data, config)
-
+                            IFieldExtractor).extract(field.__name__,
+                                                     data,
+                                                     config)
         return data

@@ -4,4 +4,5 @@
 
     <include package=".archetypes" />
 
+    <adapter factory=".representation.JSONRepresentation" />
 </configure>
