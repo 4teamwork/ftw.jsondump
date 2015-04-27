@@ -9,6 +9,7 @@ from plone.uuid.interfaces import IUUID
 from StringIO import StringIO
 from unittest2 import TestCase
 from zope.component import getMultiAdapter
+import json
 
 
 class TestArcheTypesPartial(TestCase):
@@ -33,6 +34,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'title': title},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_textfield_extractor(self):
         text = "<p>Some simple <b>markup</b></p>"
@@ -46,6 +48,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'text': text, 'text:mimetype': 'text/html'},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_datetime_field_extractor(self):
         startdate = DateTime()
@@ -59,6 +62,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'effectiveDate:date': str(startdate)},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_lines_field_extractor(self):
         creators = ['hans', 'peter', 'heiri']
@@ -73,6 +77,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'creators': creators + [TEST_USER_ID]},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_integer_field_extractor(self):
 
@@ -90,6 +95,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'demo_interger_field': integer},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_float_field_extractor(self):
 
@@ -107,6 +113,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'demo_float_field': float_},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_fixedpoint_field_extractor(self):
 
@@ -124,6 +131,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'demo_fixedpoint_field': fixedpoint},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_reference_field_extractor(self):
         ref_document1 = create(Builder('document')
@@ -147,6 +155,7 @@ class TestArcheTypesPartial(TestCase):
              'relatedItems:uuid': [
                 IUUID(ref_document1), IUUID(ref_document2)]},
             data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_single_reference_field_extractor(self):
         # XXX Imlement me
@@ -165,6 +174,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'demo_computed_field': 'Computed value'},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_boolean_field_extractor(self):
 
@@ -182,6 +192,7 @@ class TestArcheTypesPartial(TestCase):
 
         self.assertEquals({'demo_bool_field': boolean},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_file_field_extractor(self):
 
@@ -204,6 +215,7 @@ class TestArcheTypesPartial(TestCase):
                            'demo_file_field:size': len(file_data),
                            'demo_file_field:mimetype': 'application/msword'},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_file_field_extractor_WITHOUT_file_data(self):
 
@@ -225,6 +237,7 @@ class TestArcheTypesPartial(TestCase):
                            'demo_file_field:size': len(file_data),
                            'demo_file_field:mimetype': 'application/msword'},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_image_field_extractor(self):
 
@@ -252,6 +265,7 @@ class TestArcheTypesPartial(TestCase):
                            'demo_image_field:size': len(image_data),
                            'demo_image_field:mimetype': 'image/gif'},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_file_blob_field_extractor(self):
 
@@ -274,6 +288,7 @@ class TestArcheTypesPartial(TestCase):
                            'demo_file_blob_field:size': len(file_data),
                            'demo_file_blob_field:mimetype': 'application/msword'},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_image_blob_field_extractor(self):
 
@@ -301,3 +316,4 @@ class TestArcheTypesPartial(TestCase):
                            'demo_image_blob_field:size': len(image_data),
                            'demo_image_blob_field:mimetype': 'image/gif'},
                           data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
