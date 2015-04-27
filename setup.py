@@ -7,7 +7,8 @@ tests_require = [
     'unittest2',
     'ftw.testing',
     'plone.testing',
-    'ftw.builder'
+    'ftw.builder',
+    'archetypes.schemaextender',
 ]
 
 setup(name='ftw.jsondump',

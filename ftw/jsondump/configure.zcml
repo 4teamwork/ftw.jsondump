@@ -2,5 +2,6 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:i18n="http://namespaces.zope.org/i18n">
 
+    <include package=".archetypes" />
 
 </configure>

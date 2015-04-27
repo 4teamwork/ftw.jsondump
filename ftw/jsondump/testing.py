@@ -14,18 +14,20 @@ class FtwJsondumpLayer(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE, BUILDER_LAYER)
 
     def setUpZope(self, app, configurationContext):
-        import z3c.autoinclude
-        xmlconfig.file('meta.zcml', z3c.autoinclude,
-                       context=configurationContext)
         xmlconfig.string(
             '<configure xmlns="http://namespaces.zope.org/zope">'
+            '  <include package="z3c.autoinclude" file="meta.zcml" />'
             '  <includePlugins package="plone" />'
+            '  <includePluginsOverrides package="plone" />'
             '</configure>',
             context=configurationContext)
 
         import ftw.jsondump
         xmlconfig.file('configure.zcml', ftw.jsondump,
                        context=configurationContext)
+
+        import ftw.jsondump.tests
+        xmlconfig.file('tests.zcml', ftw.jsondump.tests)
 
     def setUpPloneSite(self, portal):
         setRoles(portal, TEST_USER_ID, ['Manager'])
