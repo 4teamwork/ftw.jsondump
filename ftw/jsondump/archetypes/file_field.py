@@ -18,6 +18,10 @@ class FileFieldExtractor(object):
 
     def extract(self, name, data, config):
         value = self.field.get(self.context)
+
+        if not value:
+            return ''
+
         mimetype = self.field.getContentType(self.context)
 
         if config.get('filedata', True):
