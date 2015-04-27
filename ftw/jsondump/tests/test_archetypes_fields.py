@@ -205,6 +205,27 @@ class TestArcheTypesPartial(TestCase):
                            'demo_file_field:mimetype': 'application/msword'},
                           data)
 
+    def test_file_field_extractor_WITHOUT_file_data(self):
+
+        file_data = 'File data'
+        file_ = StringIO(file_data)
+        file_.filename = 'test.doc'
+        document = create(Builder('document')
+                          .having(demo_file_field=file_))
+
+        data = {}
+        config = {'filedata': False}
+        field = document.Schema()['demo_file_field']
+
+        getMultiAdapter(
+            (document, document.REQUEST, field),
+            IFieldExtractor).extract('demo_file_field', data, config)
+
+        self.assertEquals({'demo_file_field:filename': file_.filename,
+                           'demo_file_field:size': len(file_data),
+                           'demo_file_field:mimetype': 'application/msword'},
+                          data)
+
     def test_image_field_extractor(self):
 
         # 1x1 px black image

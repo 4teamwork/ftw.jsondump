@@ -19,8 +19,11 @@ class FileFieldExtractor(object):
     def extract(self, name, data, config):
         value = self.field.get(self.context)
         mimetype = self.field.getContentType(self.context)
-        data.update({'{0}:file'.format(name): b64encode(value.data),
-                     '{0}:mimetype'.format(name): mimetype,
+
+        if config.get('filedata', True):
+            data.update({'{0}:file'.format(name): b64encode(value.data)})
+
+        data.update({'{0}:mimetype'.format(name): mimetype,
                      '{0}:size'.format(name): len(value.data),
                      '{0}:filename'.format(name): value.filename})
 
