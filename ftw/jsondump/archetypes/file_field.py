@@ -20,7 +20,7 @@ class FileFieldExtractor(object):
         value = self.field.get(self.context)
 
         if not value:
-            return ''
+            return
 
         mimetype = self.field.getContentType(self.context)
 

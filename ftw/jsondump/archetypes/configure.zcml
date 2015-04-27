@@ -3,7 +3,7 @@
     xmlns:i18n="http://namespaces.zope.org/i18n">
 
     <!-- Archetypes partial -->
-    <adapter factory=".fields.ArchetypFieldsPartial" />
+    <adapter factory=".fields.ArchetypFieldsPartial" name="archetypes_partial"/>
 
     <!-- Base extractors, using the field getter -->
     <adapter factory=".base_fields.BaseFieldExtrator"
