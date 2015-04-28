@@ -40,4 +40,4 @@ class TestPropertiesPartial(FtwJsondumpTestCase):
                                ['a_text', 'Some text', 'text']]},
                           data)
 
-        self.assertEquals(json.loads(json.dumps(data)), data)
+        self.assert_structure_equal(json.loads(json.dumps(data)), data)

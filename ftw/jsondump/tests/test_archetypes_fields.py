@@ -28,7 +28,7 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
 
         self.assertEquals({'title': title},
                           data)
-        self.assertEquals(json.loads(json.dumps(data)), data)
+        self.assert_structure_equal(json.loads(json.dumps(data)), data)
 
     def test_textfield_extractor(self):
         text = "<p>Some simple <b>markup</b></p>"

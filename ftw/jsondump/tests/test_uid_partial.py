@@ -15,4 +15,4 @@ class TestUIDPartial(FtwJsondumpTestCase):
                                   name="uid")
         data = partial({})
         self.assertEquals({'_uid': document.UID()}, data)
-        self.assertEquals(json.loads(json.dumps(data)), data)
+        self.assert_structure_equal(json.loads(json.dumps(data)), data)
