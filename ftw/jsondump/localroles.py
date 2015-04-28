@@ -14,10 +14,15 @@ class LocalRolesPartial(object):
 
     def __call__(self, config):
         rolesmapping = {}
-        data = {'__ac_local_roles__': rolesmapping}
+        data = {'__ac_local_roles__': rolesmapping,
+                '__ac_local_roles_block__': False}
 
         if getattr(self.context, '__ac_local_roles__', False):
             for principal, roles in self.context.__ac_local_roles__.items():
                 rolesmapping.update({principal: list(roles)})
 
+        data['__ac_local_roles_block__'] = getattr(
+            self.context,
+            '__ac_local_roles_block__',
+            False)
         return data
