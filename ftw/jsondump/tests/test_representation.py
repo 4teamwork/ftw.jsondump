@@ -6,6 +6,7 @@ from ftw.jsondump.interfaces import IJSONRepresentation
 from ftw.jsondump.testing import FTW_JSONDUMP_INTEGRATION_TESTING
 from ftw.jsondump.tests.helpers import asset
 from ftw.testing import freeze
+from Products.CMFCore.utils import getToolByName
 from StringIO import StringIO
 from unittest2 import TestCase
 from zope.component import getMultiAdapter
@@ -16,6 +17,11 @@ import re
 class TestJSONRepresentation(TestCase):
 
     layer = FTW_JSONDUMP_INTEGRATION_TESTING
+
+    def setUp(self):
+        self.wftool = getToolByName(self.layer['portal'], 'portal_workflow')
+        self.wftool.setChainForPortalTypes(('Document',),
+                                           ('simple_publication_workflow',))
 
     def test_archetypes_document(self):
         file_ = StringIO('File data')
@@ -37,8 +43,11 @@ class TestJSONRepresentation(TestCase):
                                       create(Builder('document').titled("Ref 2"))],
                         demo_file_blob_field=file_,
                         demo_image_blob_field=image_))
+            self.wftool.doActionFor(document, 'publish')
+            self.wftool.doActionFor(document, 'retract')
 
-        adapter = getMultiAdapter((document, document.REQUEST), IJSONRepresentation)
+        adapter = getMultiAdapter(
+            (document, document.REQUEST), IJSONRepresentation)
         data = json.loads(adapter.json())
         expected = self.get_asset_json('archetypes_document.json')
         self.assert_structure_equal(expected, data)

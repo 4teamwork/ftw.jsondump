@@ -10,5 +10,6 @@
     <adapter factory=".localroles.LocalRolesPartial" name="localroles"/>
     <adapter factory=".metadata.MetadataPartial" name="metadata" />
     <adapter factory=".uid.UIDPartial" name="uid"/>
+    <adapter factory=".workflow.WorkflowPartial" name="workflow"/>
 
 </configure>
