@@ -3,6 +3,7 @@ from ftw.builder import Builder
 from ftw.builder import create
 from ftw.jsondump.interfaces import IJSONRepresentation
 from ftw.jsondump.testing import FTW_JSONDUMP_INTEGRATION_TESTING
+from ftw.jsondump.tests.helpers import asset
 from StringIO import StringIO
 from unittest2 import TestCase
 from zope.component import getMultiAdapter
@@ -23,11 +24,7 @@ class TestJSONRepresentation(TestCase):
         file_ = StringIO(file_data)
         file_.filename = 'test.doc'
 
-        image_data = (
-            'GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00'
-            '\x00!\xf9\x04\x04\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00'
-            '\x01\x00\x00\x02\x02D\x01\x00;')
-        image_ = StringIO(image_data)
+        image_ = StringIO(asset('empty.gif').bytes())
         image_.filename = 'test.gif'
 
         self.document = create(Builder('document')
@@ -37,8 +34,7 @@ class TestJSONRepresentation(TestCase):
                                        demo_interger_field=42,
                                        demo_float_field=42.0,
                                        demo_fixedpoint_field="42.00",
-                                       relatedItems=[
-                                           ref_document1, ref_document2],
+                                       relatedItems=[ref_document1, ref_document2],
                                        demo_file_blob_field=file_,
                                        demo_image_blob_field=image_))
 
@@ -58,4 +54,3 @@ class TestJSONRepresentation(TestCase):
         self.assertIn('__ac_local_roles__',
                       json_data,
                       '__ac_local_roles__ is not present.')
-
