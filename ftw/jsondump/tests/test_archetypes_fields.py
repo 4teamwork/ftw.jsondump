@@ -3,21 +3,15 @@ from DateTime import DateTime
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.jsondump.interfaces import IFieldExtractor
-from ftw.jsondump.testing import FTW_JSONDUMP_INTEGRATION_TESTING
+from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from plone.app.testing import TEST_USER_ID
 from plone.uuid.interfaces import IUUID
 from StringIO import StringIO
-from unittest2 import TestCase
 from zope.component import getMultiAdapter
 import json
 
 
-class TestArcheTypesPartial(TestCase):
-
-    layer = FTW_JSONDUMP_INTEGRATION_TESTING
-
-    def setUp(self):
-        pass
+class TestArcheTypesPartial(FtwJsondumpTestCase):
 
     def get_path(self, obj):
         return '/'.join(obj.getPhysicalPath())

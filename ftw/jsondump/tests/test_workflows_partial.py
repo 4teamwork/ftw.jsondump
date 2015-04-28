@@ -1,16 +1,13 @@
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.jsondump.interfaces import IPartial
-from ftw.jsondump.testing import FTW_JSONDUMP_INTEGRATION_TESTING
+from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from Products.CMFCore.utils import getToolByName
-from unittest2 import TestCase
 from zope.component import getMultiAdapter
 import json
 
 
-class TestWorkflowPartial(TestCase):
-
-    layer = FTW_JSONDUMP_INTEGRATION_TESTING
+class TestWorkflowPartial(FtwJsondumpTestCase):
 
     def setUp(self):
         portal = self.layer['portal']
