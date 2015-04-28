@@ -158,7 +158,25 @@ class TestArcheTypesPartial(TestCase):
         self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_single_reference_field_extractor(self):
-        # XXX Imlement me
+        ref_document = create(Builder('document')
+                              .titled("Ref 1"))
+        document = create(Builder('document')
+                          .having(demo_single_ref_field=ref_document))
+
+        data = {}
+        config = {}
+        field = document.Schema()['demo_single_ref_field']
+
+        getMultiAdapter(
+            (document, document.REQUEST, field),
+            IFieldExtractor).extract('demo_single_ref_field', data, config)
+
+        self.assertEquals(
+            {'demo_single_ref_field:path': self.get_path(ref_document),
+             'demo_single_ref_field:uuid': IUUID(ref_document)},
+            data)
+        self.assertEquals(json.loads(json.dumps(data)), data)
+
         pass
 
     def test_computed_field_extractor(self):

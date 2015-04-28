@@ -9,6 +9,7 @@ from Products.Archetypes.atapi import FixedPointField
 from Products.Archetypes.atapi import FloatField
 from Products.Archetypes.atapi import ImageField
 from Products.Archetypes.atapi import IntegerField
+from Products.Archetypes.atapi import ReferenceField
 from Products.ATContentTypes.content.document import IATDocument
 from zope.component import adapts
 from zope.interface import implements
@@ -50,6 +51,10 @@ class DemoImageBlobField(ExtensionField, ImageBlobField):
     """Demo image field"""
 
 
+class DemoSingleRefField(ExtensionField, ReferenceField):
+    """Demo single reference field"""
+
+
 class DemoIntegerFieldExtender(object):
 
     adapts(IATDocument)
@@ -64,7 +69,12 @@ class DemoIntegerFieldExtender(object):
         DemoFileField('demo_file_field'),
         DemoImageField('demo_image_blob_field'),
         DemoFileField('demo_file_blob_field'),
-        DemoComputedField('demo_computed_field', expression='"Computed value"')]
+        DemoFileField('demo_file_blob_field'),
+        DemoSingleRefField('demo_single_ref_field',
+                           multiValued=False,
+                           relationship="demo"),
+        DemoComputedField('demo_computed_field',
+                          expression='"Computed value"')]
 
     def __init__(self, context):
         self.context = context

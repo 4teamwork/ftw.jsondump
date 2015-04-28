@@ -17,7 +17,9 @@ class ReferenceFieldExtractor(object):
 
     def extract(self, name, data, config):
 
+        multivalued = self.field.multiValued
         references = self.field.get(self.context)
+        references = multivalued and references or [references]
 
         key_path = '{0}:path'.format(name)
         value_path = map(lambda item: '/'.join(item.getPhysicalPath()),
@@ -25,5 +27,5 @@ class ReferenceFieldExtractor(object):
 
         key_uuid = '{0}:uuid'.format(name)
         value_uuid = map(lambda item: IUUID(item), references)
-        data.update({key_path: value_path,
-                     key_uuid: value_uuid})
+        data.update({key_path: multivalued and value_path or value_path[0],
+                     key_uuid: multivalued and value_uuid or value_uuid[0]})
