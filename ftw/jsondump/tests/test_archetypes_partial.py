@@ -18,7 +18,7 @@ class TestArchetypePartial(TestCase):
     def test_partial_is_jsonseriazable(self):
         partial = getMultiAdapter((self.document, self.document.REQUEST),
                                   IPartial,
-                                  name="archetypes_partial")
+                                  name="archetypes")
 
         config = {}
         partial_data = partial(config)

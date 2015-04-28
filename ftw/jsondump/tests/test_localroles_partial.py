@@ -19,7 +19,7 @@ class TestLocalRolesPartial(TestCase):
     def test_partial_is_jsonseriazable(self):
         partial = getMultiAdapter((self.folder, self.folder.REQUEST),
                                   IPartial,
-                                  name="localroles_partial")
+                                  name="localroles")
 
         config = {}
         partial_data = partial(config)
