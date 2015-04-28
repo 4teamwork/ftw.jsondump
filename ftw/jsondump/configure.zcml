@@ -11,5 +11,6 @@
     <adapter factory=".metadata.MetadataPartial" name="metadata" />
     <adapter factory=".uid.UIDPartial" name="uid"/>
     <adapter factory=".workflow.WorkflowPartial" name="workflow"/>
+    <adapter factory=".properties.PropertiesPartial" name="properties"/>
 
 </configure>

@@ -3,20 +3,17 @@ from datetime import datetime
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.jsondump.interfaces import IJSONRepresentation
-from ftw.jsondump.testing import FTW_JSONDUMP_INTEGRATION_TESTING
+from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from ftw.jsondump.tests.helpers import asset
 from ftw.testing import freeze
 from Products.CMFCore.utils import getToolByName
 from StringIO import StringIO
-from unittest2 import TestCase
 from zope.component import getMultiAdapter
 import json
 import re
 
 
-class TestJSONRepresentation(TestCase):
-
-    layer = FTW_JSONDUMP_INTEGRATION_TESTING
+class TestJSONRepresentation(FtwJsondumpTestCase):
 
     def setUp(self):
         self.wftool = getToolByName(self.layer['portal'], 'portal_workflow')
@@ -61,9 +58,3 @@ class TestJSONRepresentation(TestCase):
             raw = raw.replace(marker, obj.UID())
 
         return json.loads(raw)
-
-    def assert_structure_equal(self, expected, got, msg=None):
-        got = json.dumps(got, sort_keys=True, indent=4)
-        expected = json.dumps(expected, sort_keys=True, indent=4)
-        self.maxDiff = None
-        self.assertMultiLineEqual(got, expected, msg)

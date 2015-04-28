@@ -1,15 +1,12 @@
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.jsondump.interfaces import IPartial
-from ftw.jsondump.testing import FTW_JSONDUMP_INTEGRATION_TESTING
-from unittest2 import TestCase
+from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from zope.component import getMultiAdapter
 import json
 
 
-class TestArchetypePartial(TestCase):
-
-    layer = FTW_JSONDUMP_INTEGRATION_TESTING
+class TestArchetypePartial(FtwJsondumpTestCase):
 
     def setUp(self):
         self.document = create(Builder('document')
