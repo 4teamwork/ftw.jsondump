@@ -4,14 +4,25 @@
           "Owner"
     ]
   },
+  "__ac_local_roles_block__": false,
   "_class": "ftw.jsondump.tests.dxitem.DXItem",
   "_classname": "DXItem",
+  "_directly_provided": [],
   "_id": "the-dexterity-item",
   "_obj_position_in_parent": 58,
   "_owner": "test_user_1_",
   "_path": "/plone/the-dexterity-item",
+  "_properties": [
+        [
+              "title",
+              "The Dexterity Item",
+              "string"
+        ]
+  ],
   "_type": "DXItem",
   "_uid": "<<uid:/plone/the-dexterity-item>>",
+  "_workflow_chain": {},
+  "_workflow_history": {},
   "bool_field": true,
   "choice_field": "Blue",
   "date_field": "2010-09-08",
