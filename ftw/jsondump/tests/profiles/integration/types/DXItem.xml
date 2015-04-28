@@ -7,7 +7,7 @@
     <property name="title">DXItem</property>
     <property name="global_allow">True</property>
     <property name="add_permission">cmf.AddPortalContent</property>
-    <property name="schema">ftw.jsondump.tests.dxitem.IDxItemSchema</property>
+    <property name="schema">ftw.jsondump.tests.dxitem.IDXItemSchema</property>
     <property name="klass">ftw.jsondump.tests.dxitem.DXItem</property>
 
     <property name="behaviors">

@@ -1,0 +1,13 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+    <adapter factory=".fields.DexterityFieldsPartial" name="dexterity" />
+
+    <adapter factory=".base.PlainFieldExtractor" />
+
+    <adapter for="* * plone.namedfile.interfaces.INamedField" factory=".namedfile.NamedFileExtractor" />
+    <adapter for="* * zope.schema.interfaces.IDate" factory=".datetime.DatetimeExtrator" />
+    <adapter for="* * zope.schema.interfaces.IDatetime" factory=".datetime.DatetimeExtrator" />
+    <adapter for="* * zope.schema.interfaces.ITime" factory=".datetime.DatetimeExtrator" />
+    <adapter for="* * zope.schema.interfaces.ITimedelta" factory=".datetime.TimedeltaExtractor" />
+
+</configure>
