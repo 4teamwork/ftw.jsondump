@@ -7,7 +7,7 @@ from zope.interface import implements
 from zope.interface import Interface
 
 
-class ArchetypFieldsPartial(object):
+class ArchetypesFieldsPartial(object):
     implements(IPartial)
     adapts(IBaseObject, Interface)
 
