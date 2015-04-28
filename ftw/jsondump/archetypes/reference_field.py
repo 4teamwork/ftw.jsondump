@@ -1,9 +1,9 @@
 from ftw.jsondump.interfaces import IFieldExtractor
+from plone.uuid.interfaces import IUUID
 from Products.Archetypes.interfaces.field import IReferenceField
 from zope.component import adapts
 from zope.interface import implements
 from zope.interface import Interface
-from plone.uuid.interfaces import IUUID
 
 
 class ReferenceFieldExtractor(object):
@@ -17,15 +17,28 @@ class ReferenceFieldExtractor(object):
 
     def extract(self, name, data, config):
 
-        multivalued = self.field.multiValued
         references = self.field.get(self.context)
-        references = multivalued and references or [references]
 
         key_path = '{0}:path'.format(name)
-        value_path = map(lambda item: '/'.join(item.getPhysicalPath()),
-                         references)
-
         key_uuid = '{0}:uuid'.format(name)
-        value_uuid = map(lambda item: IUUID(item), references)
-        data.update({key_path: multivalued and value_path or value_path[0],
-                     key_uuid: multivalued and value_uuid or value_uuid[0]})
+        data.update({key_path: self.get_paths(references),
+                     key_uuid: self.get_uuids(references)})
+
+    def get_paths(self, references):
+        if not references:
+            return ''
+        elif isinstance(references, list):
+            return map(lambda item: '/'.join(item.getPhysicalPath()),
+                       references)
+        else:
+            # Single reference field
+            return '/'.join(references.getPhysicalPath())
+
+    def get_uuids(self, references):
+        if not references:
+            return ''
+        elif isinstance(references, list):
+            return map(lambda item: IUUID(item), references)
+        else:
+            # Single references field
+            return IUUID(references)
