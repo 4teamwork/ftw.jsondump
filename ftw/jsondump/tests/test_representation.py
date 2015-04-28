@@ -48,3 +48,14 @@ class TestJSONRepresentation(TestCase):
 
         json_data = adapter.json()
         self.assertTrue(isinstance(json.loads(json_data), dict))
+
+    def test_localroles_data_is_always_present(self):
+        adapter = getMultiAdapter((self.document, self.document.REQUEST),
+                                  IJSONRepresentation)
+
+        json_data = adapter.json()
+
+        self.assertIn('__ac_local_roles__',
+                      json_data,
+                      '__ac_local_roles__ is not present.')
+

@@ -2,6 +2,8 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:i18n="http://namespaces.zope.org/i18n">
 
+    <!-- Partials -->
+    <adapter factory=".localroles.LocalRolesPartial" name="localroles_partial"/>
     <include package=".archetypes" />
 
     <adapter factory=".representation.JSONRepresentation" />
