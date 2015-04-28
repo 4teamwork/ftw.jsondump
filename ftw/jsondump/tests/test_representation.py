@@ -10,6 +10,7 @@ from StringIO import StringIO
 from unittest2 import TestCase
 from zope.component import getMultiAdapter
 import json
+import re
 
 
 class TestJSONRepresentation(TestCase):
@@ -39,10 +40,18 @@ class TestJSONRepresentation(TestCase):
 
         adapter = getMultiAdapter((document, document.REQUEST), IJSONRepresentation)
         data = json.loads(adapter.json())
-        data['relatedItems:uuid'] = ['<REPLACED>' for uid in data['relatedItems:uuid']]
-
-        expected = json.loads(asset('archetypes_document.json').text())
+        expected = self.get_asset_json('archetypes_document.json')
         self.assert_structure_equal(expected, data)
+
+    def get_asset_json(self, name):
+        raw = asset(name).text()
+
+        # replace uids
+        for marker, path in re.findall(r'(<<uid:([^>]*)>>)', raw):
+            obj = self.layer['app'].restrictedTraverse(path.encode('utf-8'))
+            raw = raw.replace(marker, obj.UID())
+
+        return json.loads(raw)
 
     def assert_structure_equal(self, expected, got, msg=None):
         got = json.dumps(got, sort_keys=True, indent=4)
