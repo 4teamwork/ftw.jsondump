@@ -4,6 +4,13 @@
           "Owner"
     ]
   },
+  "_class": "Products.ATContentTypes.content.document.ATDocument",
+  "_classname": "ATDocument",
+  "_id": "my-document",
+  "_obj_position_in_parent": 60,
+  "_owner": "test_user_1_",
+  "_path": "/plone/my-document",
+  "_type": "Document",
   "allowDiscussion": null,
   "contributors": [],
   "creation_date:date": "2010/12/28 10:55:12 GMT+1",
