@@ -32,5 +32,7 @@
     <adapter factory=".reference_field.ReferenceFieldExtractor" />
     <adapter factory=".file_field.FileFieldExtractor" />
     <adapter factory=".file_field.ImageFieldExtractor" />
+    <adapter factory=".file_field.FileBlobFieldExtractor" />
+    <adapter factory=".file_field.ImageBlobFieldExtractor" />
 
 </configure>

@@ -1,5 +1,7 @@
 from base64 import b64encode
 from ftw.jsondump.interfaces import IFieldExtractor
+from plone.app.blob.interfaces import IBlobField
+from plone.app.blob.interfaces import IBlobImageField
 from Products.Archetypes.interfaces.field import IFileField
 from Products.Archetypes.interfaces.field import IImageField
 from zope.component import adapts
@@ -34,3 +36,11 @@ class FileFieldExtractor(object):
 
 class ImageFieldExtractor(FileFieldExtractor):
     adapts(Interface, Interface, IImageField)
+
+
+class FileBlobFieldExtractor(FileFieldExtractor):
+    adapts(Interface, Interface, IBlobField)
+
+
+class ImageBlobFieldExtractor(FileFieldExtractor):
+    adapts(Interface, Interface, IBlobImageField)
