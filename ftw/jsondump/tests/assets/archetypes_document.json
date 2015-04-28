@@ -12,6 +12,33 @@
   "_path": "/plone/my-document",
   "_type": "Document",
   "_uid": "<<uid:/plone/my-document>>",
+  "__ac_local_roles_block__": false,
+  "_workflow_chain": {
+    "simple_publication_workflow": "private"
+  },
+  "_workflow_history": {
+    "simple_publication_workflow":
+      [
+        {
+          "action": null,
+          "actor": "test_user_1_",
+          "comments": "",
+          "review_state": null,
+          "time": "2010/12/28 10:55:12 GMT+1"},
+        {
+          "action": "publish",
+          "actor": "test_user_1_",
+          "comments": "",
+          "review_state": "publish",
+          "time": "2010/12/28 10:55:12 GMT+1"},
+        {
+          "action": "retract",
+          "actor": "test_user_1_",
+          "comments": "",
+          "review_state": "retract",
+          "time": "2010/12/28 10:55:12 GMT+1"}
+      ]
+  },
   "allowDiscussion": null,
   "contributors": [],
   "creation_date:date": "2010/12/28 10:55:12 GMT+1",
