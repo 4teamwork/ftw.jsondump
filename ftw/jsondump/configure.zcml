@@ -9,5 +9,6 @@
     <!-- Partials -->
     <adapter factory=".localroles.LocalRolesPartial" name="localroles"/>
     <adapter factory=".metadata.MetadataPartial" name="metadata" />
+    <adapter factory=".uid.UIDPartial" name="uid"/>
 
 </configure>

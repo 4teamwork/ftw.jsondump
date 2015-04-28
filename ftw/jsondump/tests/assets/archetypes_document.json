@@ -11,6 +11,7 @@
   "_owner": "test_user_1_",
   "_path": "/plone/my-document",
   "_type": "Document",
+  "_uid": "<<uid:/plone/my-document>>",
   "allowDiscussion": null,
   "contributors": [],
   "creation_date:date": "2010/12/28 10:55:12 GMT+1",
@@ -51,8 +52,8 @@
         "/plone/ref-2"
   ],
   "relatedItems:uuid": [
-        "<REPLACED>",
-        "<REPLACED>"
+        "<<uid:/plone/ref-1>>",
+        "<<uid:/plone/ref-2>>"
   ],
   "rights": "",
   "rights:mimetype": "text/html",
