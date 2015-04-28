@@ -1,0 +1,15 @@
+{
+  "__ac_local_roles__": {
+    "test_user_1_": [
+          "Owner"
+    ]
+  },
+  "_class": "ftw.jsondump.tests.dxitem.DXItem",
+  "_classname": "DXItem",
+  "_id": "the-dexterity-item",
+  "_obj_position_in_parent": 58,
+  "_owner": "test_user_1_",
+  "_path": "/plone/the-dexterity-item",
+  "_type": "DXItem",
+  "_uid": "<<uid:/plone/the-dexterity-item>>"
+}

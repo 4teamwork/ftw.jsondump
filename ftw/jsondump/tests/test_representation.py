@@ -49,6 +49,16 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
         expected = self.get_asset_json('archetypes_document.json')
         self.assert_structure_equal(expected, data)
 
+    def test_dexterity_item(self):
+        item = create(
+            Builder('dx item')
+            .titled(u'The dexterity item'))
+
+        adapter = getMultiAdapter((item, item.REQUEST), IJSONRepresentation)
+        data = json.loads(adapter.json())
+        expected = self.get_asset_json('dexterity_item.json')
+        self.assert_structure_equal(expected, data)
+
     def get_asset_json(self, name):
         raw = asset(name).text()
 
