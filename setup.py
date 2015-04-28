@@ -4,12 +4,13 @@ import os
 version = '1.0.0.dev0'
 
 tests_require = [
-    'unittest2',
-    'ftw.testing',
-    'plone.testing',
-    'ftw.builder',
     'archetypes.schemaextender',
-]
+    'ftw.builder',
+    'ftw.testing',
+    'path.py',
+    'plone.testing',
+    'unittest2',
+    ]
 
 setup(name='ftw.jsondump',
       version=version,

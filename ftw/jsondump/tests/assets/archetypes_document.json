@@ -1,0 +1,57 @@
+{
+  "__ac_local_roles__": {
+    "test_user_1_": [
+          "Owner"
+    ]
+  },
+  "allowDiscussion": null,
+  "contributors": [],
+  "creation_date:date": "2010/12/28 10:55:12 GMT+1",
+  "creators": [
+        "test_user_1_"
+  ],
+  "demo_bool_field": false,
+  "demo_computed_field": "Computed value",
+  "demo_file_blob_field:file": "RmlsZSBkYXRh",
+  "demo_file_blob_field:filename": "test.doc",
+  "demo_file_blob_field:mimetype": "application/msword",
+  "demo_file_blob_field:size": 9,
+  "demo_file_field:file": "",
+  "demo_file_field:filename": "",
+  "demo_file_field:mimetype": "application/octet-stream",
+  "demo_file_field:size": 0,
+  "demo_fixedpoint_field": "42.00",
+  "demo_float_field": 42.0,
+  "demo_image_blob_field:file": "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+  "demo_image_blob_field:filename": "test.gif",
+  "demo_image_blob_field:mimetype": "image/gif",
+  "demo_image_blob_field:size": 42,
+  "demo_interger_field": 42,
+  "demo_single_ref_field:path": "",
+  "demo_single_ref_field:uuid": "",
+  "description": "",
+  "description:mimetype": "text/plain",
+  "effectiveDate:date": "2010/12/28 10:55:12 GMT+1",
+  "excludeFromNav": false,
+  "expirationDate:date": "None",
+  "id": "my-document",
+  "language": "en",
+  "location": "",
+  "modification_date:date": "2010/12/28 10:55:12 GMT+1",
+  "presentation": false,
+  "relatedItems:path": [
+        "/plone/ref-1",
+        "/plone/ref-2"
+  ],
+  "relatedItems:uuid": [
+        "<REPLACED>",
+        "<REPLACED>"
+  ],
+  "rights": "",
+  "rights:mimetype": "text/html",
+  "subject": [],
+  "tableContents": false,
+  "text": "<p>\"S\u00f6mesimple\" <b>markup</b></p>",
+  "text:mimetype": "text/html",
+  "title": "My document"
+}
