@@ -8,9 +8,9 @@ from ftw.builder import create
 from ftw.jsondump.interfaces import IJSONRepresentation
 from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from ftw.jsondump.tests.helpers import asset
+from ftw.jsondump.tests.helpers import asset_as_StringIO
 from ftw.testing import freeze
 from Products.CMFCore.utils import getToolByName
-from StringIO import StringIO
 from zope.component import getMultiAdapter
 import json
 import re
@@ -24,12 +24,6 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
                                            ('simple_publication_workflow',))
 
     def test_archetypes_document(self):
-        file_ = StringIO('File data')
-        file_.filename = 'test.doc'
-
-        image_ = StringIO(asset('empty.gif').bytes())
-        image_.filename = 'test.gif'
-
         with freeze(datetime(2010, 12, 28, 10, 55, 12)):
             document = create(
                 Builder('document')
@@ -41,8 +35,8 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
                         demo_fixedpoint_field="42.00",
                         relatedItems=[create(Builder('document').titled("Ref 1")),
                                       create(Builder('document').titled("Ref 2"))],
-                        demo_file_blob_field=file_,
-                        demo_image_blob_field=image_))
+                        demo_file_blob_field=asset_as_StringIO('helloworld.py'),
+                        demo_image_blob_field=asset_as_StringIO('empty.gif')))
             self.wftool.doActionFor(document, 'publish')
             self.wftool.doActionFor(document, 'retract')
 
