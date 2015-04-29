@@ -21,4 +21,4 @@ class JSONRepresentation(object):
         for name, partial in getAdapters((self.context, self.request), IPartial):
             data.update(partial(config))
 
-        return json.dumps(data)
+        return json.dumps(data, sort_keys=True, indent=4)
