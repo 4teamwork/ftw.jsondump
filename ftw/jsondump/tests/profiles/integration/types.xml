@@ -1,0 +1,3 @@
+<object name="portal_types">
+    <object name="DXItem" meta_type="Dexterity FTI" />
+</object>

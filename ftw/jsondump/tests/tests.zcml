@@ -1,10 +1,23 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five">
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="ftw.jsondump">
 
     <include package="AccessControl" file="meta.zcml" />
+    <include package="Products.GenericSetup" file="meta.zcml" />
+
     <include package="archetypes.schemaextender" />
     <adapter factory=".extender.DemoIntegerFieldExtender"
-         name="ftw.jsondump.demo.integer.extender" />
+             name="ftw.jsondump.demo.integer.extender" />
+
+    <genericsetup:registerProfile
+        name="integration"
+        title="ftw.jsondump.tests:integration"
+        directory="profiles/integration"
+        description=""
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
 
 </configure>

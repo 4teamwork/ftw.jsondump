@@ -8,6 +8,8 @@ tests_require = [
     'ftw.builder',
     'ftw.testing',
     'path.py',
+    'plone.app.dexterity',
+    'plone.directives.form',
     'plone.testing',
     'unittest2',
     ]

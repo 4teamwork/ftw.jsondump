@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<object name="ExampleDxType"
+        meta_type="Dexterity FTI"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="ftw.jsondump.tests" >
+
+    <property name="title">DXItem</property>
+    <property name="global_allow">True</property>
+    <property name="add_permission">cmf.AddPortalContent</property>
+    <property name="schema">ftw.jsondump.tests.dxitem.IDXItemSchema</property>
+    <property name="klass">ftw.jsondump.tests.dxitem.DXItem</property>
+
+    <property name="behaviors">
+        <element value="plone.app.dexterity.behaviors.metadata.IBasic" />
+        <element value="plone.app.content.interfaces.INameFromTitle" />
+    </property>
+
+</object>

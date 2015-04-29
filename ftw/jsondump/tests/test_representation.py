@@ -1,5 +1,8 @@
+from datetime import date
 from DateTime import DateTime
 from datetime import datetime
+from datetime import time
+from datetime import timedelta
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.jsondump.interfaces import IJSONRepresentation
@@ -47,6 +50,31 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
             (document, document.REQUEST), IJSONRepresentation)
         data = json.loads(adapter.json())
         expected = self.get_asset_json('archetypes_document.json')
+        self.assert_structure_equal(expected, data)
+
+    def test_dexterity_item(self):
+        item = create(
+            Builder('dx item')
+            .titled(u'The Dexterity Item')
+            .having(description=u'This is a great item!',
+                    bool_field=True,
+                    choice_field='Blue',
+                    date_field=date(2010, 9, 8),
+                    datetime_field=datetime(2012, 12, 30, 23, 59),
+                    decimal_field=2.6,
+                    dottedname_field='zope.schema.interfaces.IDottedName',
+                    float_field=1.3,
+                    list_field=[u'foo', u'bar', u'baz'],
+                    text_field=u'A great text.',
+                    time_field=time(23, 58, 59, 1),
+                    timedelta_field=timedelta(days=2, milliseconds=1, microseconds=7),
+                    uri_field='http://www.python.org/foo/bar')
+            .attach_image(asset('empty.gif'))
+            .attach_file(asset('helloworld.py')))
+
+        adapter = getMultiAdapter((item, item.REQUEST), IJSONRepresentation)
+        data = json.loads(adapter.json())
+        expected = self.get_asset_json('dexterity_item.json')
         self.assert_structure_equal(expected, data)
 
     def get_asset_json(self, name):
