@@ -5,34 +5,14 @@
     <!-- Archetypes partial -->
     <adapter factory=".fields.ArchetypesFieldsPartial" name="archetypes"/>
 
-    <!-- Base extractors, using the field getter -->
-    <adapter factory=".base_fields.BaseFieldExtrator"
-             for="* * Products.Archetypes.interfaces.field.IStringField"
-             />
-    <adapter factory=".base_fields.BaseFieldExtrator"
-             for="* * Products.Archetypes.interfaces.field.IIntegerField"
-             />
-    <adapter factory=".base_fields.BaseFieldExtrator"
-             for="* * Products.Archetypes.interfaces.field.IFloatField"
-             />
-    <adapter factory=".base_fields.BaseFieldExtrator"
-             for="* * Products.Archetypes.interfaces.field.IFixedPointField"
-             />
-    <adapter factory=".base_fields.BaseFieldExtrator"
-             for="* * Products.Archetypes.interfaces.field.IComputedField"
-             />
-    <adapter factory=".base_fields.BaseFieldExtrator"
-             for="* * Products.Archetypes.interfaces.field.IBooleanField"
-             />
-
-    <!-- Extended extractors -->
+    <adapter factory=".base_fields.BaseFieldExtrator" />
     <adapter factory=".date_field.DateFieldExtractor" />
-    <adapter factory=".lines_field.LinesFieldExtractor" />
-    <adapter factory=".text_field.TextFieldExtractor" />
-    <adapter factory=".reference_field.ReferenceFieldExtractor" />
-    <adapter factory=".file_field.FileFieldExtractor" />
-    <adapter factory=".file_field.ImageFieldExtractor" />
     <adapter factory=".file_field.FileBlobFieldExtractor" />
+    <adapter factory=".file_field.FileFieldExtractor" />
     <adapter factory=".file_field.ImageBlobFieldExtractor" />
+    <adapter factory=".file_field.ImageFieldExtractor" />
+    <adapter factory=".lines_field.LinesFieldExtractor" />
+    <adapter factory=".reference_field.ReferenceFieldExtractor" />
+    <adapter factory=".text_field.TextFieldExtractor" />
 
 </configure>
