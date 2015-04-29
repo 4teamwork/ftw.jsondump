@@ -33,6 +33,12 @@ class FileFieldExtractor(object):
                      '{0}:size'.format(name): len(value.data),
                      '{0}:filename'.format(name): value.filename})
 
+        file_callback = config.get('file_callback', None)
+        if file_callback:
+            file_callback(self.context, name,
+                          value.data, value.filename, mimetype,
+                          data)
+
 
 class ImageFieldExtractor(FileFieldExtractor):
     adapts(Interface, Interface, IImageField)
