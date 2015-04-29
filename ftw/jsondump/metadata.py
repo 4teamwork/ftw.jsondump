@@ -22,10 +22,13 @@ class MetadataPartial(object):
         data = {'_classname': klass.__name__,
                 '_class': klass.__module__ + '.' + klass.__name__,
                 '_id': self.context.getId(),
-                '_obj_position_in_parent': (IOrderedContainer(parent)
-                                            .getObjectPosition(self.context.getId())),
                 '_owner': self.context.getOwner().getId(),
                 '_path': '/'.join(self.context.getPhysicalPath()),
                 '_type': self.context.portal_type}
+
+        ordered_parent = IOrderedContainer(parent, None)
+        if ordered_parent:
+            data['_obj_position_in_parent'] = ordered_parent.getObjectPosition(
+                self.context.getId())
 
         return data
