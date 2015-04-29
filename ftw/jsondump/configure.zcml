@@ -12,5 +12,6 @@
     <adapter factory=".uid.UIDPartial" name="uid"/>
     <adapter factory=".workflow.WorkflowPartial" name="workflow"/>
     <adapter factory=".properties.PropertiesPartial" name="properties"/>
+    <adapter factory=".directly_provided_interfaces.InterfacesPartial" name="interfaces"/>
 
 </configure>

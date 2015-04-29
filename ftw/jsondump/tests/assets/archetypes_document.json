@@ -46,6 +46,9 @@
           "string"
       ]
   ],
+  "_directly_provided": [
+      "Products.CMFEditions.interfaces.IVersioned"
+  ],
   "allowDiscussion": null,
   "contributors": [],
   "creation_date:date": "2010/12/28 10:55:12 GMT+1",
