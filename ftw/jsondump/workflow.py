@@ -25,8 +25,9 @@ class WorkflowPartial(object):
         wftool = getToolByName(self.context, "portal_workflow")
 
         for wf_id in wftool.getChainForPortalType(self.context.portal_type):
-            workflows[wf_id] = wftool.getStatusOf(
-                wf_id, self.context).get('review_state', '')
+            status = wftool.getStatusOf(wf_id, self.context)
+            if status:
+                workflows[wf_id] = status.get('review_state', '')
 
     def workflow_history(self):
         history = {}
