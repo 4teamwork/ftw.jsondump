@@ -11,13 +11,13 @@ class TestWorkflowPartial(FtwJsondumpTestCase):
 
     def setUp(self):
         portal = self.layer['portal']
-        wftool = getToolByName(portal, 'portal_workflow')
-        wftool.setChainForPortalTypes(('Folder',),
-                                      ('simple_publication_workflow',))
+        self.wftool = getToolByName(portal, 'portal_workflow')
+        self.wftool.setChainForPortalTypes(('Folder',),
+                                           ('simple_publication_workflow',))
 
         self.folder = create(Builder('folder'))
-        wftool.doActionFor(self.folder, 'publish')
-        wftool.doActionFor(self.folder, 'retract')
+        self.wftool.doActionFor(self.folder, 'publish')
+        self.wftool.doActionFor(self.folder, 'retract')
 
     def test_partial_data(self):
         partial = getMultiAdapter((self.folder, self.folder.REQUEST),
@@ -59,3 +59,19 @@ class TestWorkflowPartial(FtwJsondumpTestCase):
         config = {}
         partial_data = partial(config)
         self.assertEquals(json.loads(json.dumps(partial_data)), partial_data)
+
+    def test_do_not_fail_if_content_has_no_workflow(self):
+        self.wftool.setChainForPortalTypes(('Document',),
+                                           ('None',))
+
+        self.folder = create(Builder('document'))
+
+        partial = getMultiAdapter((self.folder, self.folder.REQUEST),
+                                  IPartial,
+                                  name="workflow")
+
+        config = {}
+        partial_data = partial(config)
+
+        self.assertEquals({'_workflow_chain': {}, '_workflow_history': {}},
+                          partial_data)
