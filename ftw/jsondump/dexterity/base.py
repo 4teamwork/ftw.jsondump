@@ -18,7 +18,13 @@ class PlainFieldExtractor(object):
         storage = self.field.interface(self.context)
         value = getattr(storage, name)
         value = self.convert(value)
-        data.update({name: value})
+        data.update({self.key: value})
+
+    @property
+    def key(self):
+        return '.'.join((
+                self.field.interface.__identifier__,
+                self.field.__name__))
 
     def convert(self, value):
         return value
