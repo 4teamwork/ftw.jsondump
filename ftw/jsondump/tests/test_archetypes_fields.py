@@ -1,12 +1,13 @@
-from base64 import b64encode
 from DateTime import DateTime
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.jsondump.interfaces import IFieldExtractor
 from ftw.jsondump.tests.base import FtwJsondumpTestCase
+from ftw.jsondump.tests.helpers import asset_as_StringIO
+from ftw.jsondump.tests.helpers import EMPTY_GIF_BASE64
+from ftw.jsondump.tests.helpers import HELLOWORLD_BASE64
 from plone.app.testing import TEST_USER_ID
 from plone.uuid.interfaces import IUUID
-from StringIO import StringIO
 from zope.component import getMultiAdapter
 import json
 
@@ -239,12 +240,8 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
         self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_file_field_extractor(self):
-
-        file_data = 'File data'
-        file_ = StringIO(file_data)
-        file_.filename = 'test.doc'
         document = create(Builder('document')
-                          .having(demo_file_field=file_))
+                          .having(demo_file_field=asset_as_StringIO('helloworld.py')))
 
         data = {}
         config = {}
@@ -254,20 +251,16 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
             (document, document.REQUEST, field),
             IFieldExtractor).extract('demo_file_field', data, config)
 
-        self.assertEquals({'demo_file_field:file': b64encode(file_data),
-                           'demo_file_field:filename': file_.filename,
-                           'demo_file_field:size': len(file_data),
-                           'demo_file_field:mimetype': 'application/msword'},
+        self.assertEquals({'demo_file_field:file': HELLOWORLD_BASE64,
+                           'demo_file_field:filename': 'helloworld.py',
+                           'demo_file_field:size': 20,
+                           'demo_file_field:mimetype': 'text/x-python'},
                           data)
         self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_file_field_extractor_WITHOUT_file_data(self):
-
-        file_data = 'File data'
-        file_ = StringIO(file_data)
-        file_.filename = 'test.doc'
         document = create(Builder('document')
-                          .having(demo_file_field=file_))
+                          .having(demo_file_field=asset_as_StringIO('helloworld.py')))
 
         data = {}
         config = {'filedata': False}
@@ -277,24 +270,15 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
             (document, document.REQUEST, field),
             IFieldExtractor).extract('demo_file_field', data, config)
 
-        self.assertEquals({'demo_file_field:filename': file_.filename,
-                           'demo_file_field:size': len(file_data),
-                           'demo_file_field:mimetype': 'application/msword'},
+        self.assertEquals({'demo_file_field:filename': 'helloworld.py',
+                           'demo_file_field:size': 20,
+                           'demo_file_field:mimetype': 'text/x-python'},
                           data)
         self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_image_field_extractor(self):
-
-        # 1x1 px black image
-        image_data = (
-            'GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00'
-            '\x00!\xf9\x04\x04\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00'
-            '\x01\x00\x00\x02\x02D\x01\x00;')
-
-        file_ = StringIO(image_data)
-        file_.filename = 'test.gif'
         document = create(Builder('document')
-                          .having(demo_image_field=file_))
+                          .having(demo_image_field=asset_as_StringIO('empty.gif')))
 
         data = {}
         config = {}
@@ -304,20 +288,16 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
             (document, document.REQUEST, field),
             IFieldExtractor).extract('demo_image_field', data, config)
 
-        self.assertEquals({'demo_image_field:file': b64encode(image_data),
-                           'demo_image_field:filename': file_.filename,
-                           'demo_image_field:size': len(image_data),
+        self.assertEquals({'demo_image_field:file': EMPTY_GIF_BASE64,
+                           'demo_image_field:filename': 'empty.gif',
+                           'demo_image_field:size': 42,
                            'demo_image_field:mimetype': 'image/gif'},
                           data)
         self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_file_blob_field_extractor(self):
-
-        file_data = 'File data'
-        file_ = StringIO(file_data)
-        file_.filename = 'test.doc'
         document = create(Builder('document')
-                          .having(demo_file_blob_field=file_))
+                          .having(demo_file_blob_field=asset_as_StringIO('helloworld.py')))
 
         data = {}
         config = {}
@@ -327,25 +307,16 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
             (document, document.REQUEST, field),
             IFieldExtractor).extract('demo_file_blob_field', data, config)
 
-        self.assertEquals({'demo_file_blob_field:file': b64encode(file_data),
-                           'demo_file_blob_field:filename': file_.filename,
-                           'demo_file_blob_field:size': len(file_data),
-                           'demo_file_blob_field:mimetype': 'application/msword'},
+        self.assertEquals({'demo_file_blob_field:file': HELLOWORLD_BASE64,
+                           'demo_file_blob_field:filename': 'helloworld.py',
+                           'demo_file_blob_field:size': 20,
+                           'demo_file_blob_field:mimetype': 'text/x-python'},
                           data)
         self.assertEquals(json.loads(json.dumps(data)), data)
 
     def test_image_blob_field_extractor(self):
-
-        # 1x1 px black image
-        image_data = (
-            'GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00'
-            '\x00!\xf9\x04\x04\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00'
-            '\x01\x00\x00\x02\x02D\x01\x00;')
-
-        file_ = StringIO(image_data)
-        file_.filename = 'test.gif'
         document = create(Builder('document')
-                          .having(demo_image_blob_field=file_))
+                          .having(demo_image_blob_field=asset_as_StringIO('empty.gif')))
 
         data = {}
         config = {}
@@ -355,9 +326,9 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
             (document, document.REQUEST, field),
             IFieldExtractor).extract('demo_image_blob_field', data, config)
 
-        self.assertEquals({'demo_image_blob_field:file': b64encode(image_data),
-                           'demo_image_blob_field:filename': file_.filename,
-                           'demo_image_blob_field:size': len(image_data),
+        self.assertEquals({'demo_image_blob_field:file': EMPTY_GIF_BASE64,
+                           'demo_image_blob_field:filename': 'empty.gif',
+                           'demo_image_blob_field:size': 42,
                            'demo_image_blob_field:mimetype': 'image/gif'},
                           data)
         self.assertEquals(json.loads(json.dumps(data)), data)
