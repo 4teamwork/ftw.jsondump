@@ -16,17 +16,28 @@ class JSONRepresentation(object):
         self.context = context
         self.request = request
 
-    def json(self, only=None, **config):
+    def json(self, only=None, exclude=None, **config):
+        if only and exclude:
+            raise ValueError('Cannot use "only" and "exclude" simultaneously.')
+
         if only:
             partials = self.get_selected_partials(only)
-
         else:
-            partials = getAdapters((self.context, self.request), IPartial)
+            partials = self.get_partials(exclude)
 
         data = {}
         for name, partial in partials:
             data.update(partial(config))
         return json.dumps(data, sort_keys=True, indent=4)
+
+    def get_partials(self, exclude=None):
+        if not exclude:
+            exclude = []
+
+        for name, partial in getAdapters((self.context, self.request), IPartial):
+            if name in exclude:
+                continue
+            yield name, partial
 
     def get_selected_partials(self, names):
         for name in names:

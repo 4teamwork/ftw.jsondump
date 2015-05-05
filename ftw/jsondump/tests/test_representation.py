@@ -6,12 +6,14 @@ from datetime import timedelta
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.jsondump.interfaces import IJSONRepresentation
+from ftw.jsondump.representation import JSONRepresentation
 from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from ftw.jsondump.tests.helpers import asset
 from ftw.jsondump.tests.helpers import asset_as_StringIO
 from ftw.testing import freeze
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
+from zope.interface.verify import verifyClass
 import json
 import re
 
@@ -22,6 +24,9 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
         self.wftool = getToolByName(self.layer['portal'], 'portal_workflow')
         self.wftool.setChainForPortalTypes(('Document',),
                                            ('simple_publication_workflow',))
+
+    def test_representation_interface(self):
+        verifyClass(IJSONRepresentation, JSONRepresentation)
 
     def test_archetypes_document(self):
         with freeze(datetime(2010, 12, 28, 10, 55, 12)):
@@ -76,7 +81,30 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
         adapter = getMultiAdapter((document, document.REQUEST),
                                   IJSONRepresentation)
         data = json.loads(adapter.json(only=['interfaces', 'properties']))
-        self.assertItemsEqual(['_directly_provided', '_properties'], data)
+        self.assertItemsEqual(['_directly_provided', '_properties'], data.keys())
+
+    def test_exclude_partials(self):
+        document = create(Builder('document').titled("My document"))
+        adapter = getMultiAdapter((document, document.REQUEST),
+                                  IJSONRepresentation)
+
+        data = json.loads(adapter.json()).keys()
+        self.assertIn('_properties', data)
+        self.assertIn('_directly_provided', data)
+
+        data = json.loads(adapter.json(exclude=['properties'])).keys()
+        self.assertNotIn('_properties', data)
+        self.assertIn('_directly_provided', data)
+
+    def test_cannot_use_only_and_exclude_simultaneously(self):
+        document = create(Builder('document').titled("My document"))
+        adapter = getMultiAdapter((document, document.REQUEST),
+                                  IJSONRepresentation)
+        with self.assertRaises(ValueError) as cm:
+            adapter.json(only=['properties'], exclude=['interfaces'])
+
+        self.assertEquals('Cannot use "only" and "exclude" simultaneously.',
+                          str(cm.exception))
 
     def get_asset_json(self, name):
         raw = asset(name).text()
