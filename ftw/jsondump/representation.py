@@ -18,7 +18,8 @@ class JSONRepresentation(object):
     def json(self, **config):
         data = {}
 
-        for name, partial in getAdapters((self.context, self.request), IPartial):
+        for name, partial in getAdapters((self.context, self.request),
+                                         IPartial):
             data.update(partial(config))
 
         return json.dumps(data, sort_keys=True, indent=4)
