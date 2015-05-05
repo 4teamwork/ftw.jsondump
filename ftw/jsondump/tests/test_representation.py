@@ -71,6 +71,13 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
         expected = self.get_asset_json('dexterity_item.json')
         self.assert_structure_equal(expected, data)
 
+    def test_build_only_selected_partials(self):
+        document = create(Builder('document').titled("My document"))
+        adapter = getMultiAdapter((document, document.REQUEST),
+                                  IJSONRepresentation)
+        data = json.loads(adapter.json(only=['interfaces', 'properties']))
+        self.assertItemsEqual(['_directly_provided', '_properties'], data)
+
     def get_asset_json(self, name):
         raw = asset(name).text()
 
