@@ -4,14 +4,19 @@ import os
 version = '1.0.0.dev0'
 
 tests_require = [
+    'AccessControl',
+    'Products.ATContentTypes',
+    'Products.GenericSetup',
     'archetypes.schemaextender',
     'ftw.builder',
     'ftw.testing',
     'path.py',
     'plone.app.dexterity',
+    'plone.app.testing',
     'plone.directives.form',
-    'plone.testing',
+    'plone.namedfile',
     'unittest2',
+    'zope.configuration',
     ]
 
 setup(name='ftw.jsondump',
@@ -42,8 +47,18 @@ setup(name='ftw.jsondump',
       zip_safe=False,
 
       install_requires=[
-        'setuptools',
+        'Acquisition',
+        'Products.Archetypes',
         'Products.CMFCore',
+        'Zope2',
+        'plone.app.blob',
+        'plone.dexterity',
+        'plone.uuid',
+        'setuptools',
+        'zope.component',
+        'zope.i18nmessageid',
+        'zope.interface',
+        'zope.schema',
         ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),
