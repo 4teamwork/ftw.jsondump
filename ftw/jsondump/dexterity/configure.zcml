@@ -1,6 +1,6 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
-    <adapter factory=".fields.DexterityFieldsPartial" name="dexterity" />
+    <adapter factory=".fields.DexterityFieldsPartial" name="fields" />
 
     <adapter factory=".base.PlainFieldExtractor" />
 
