@@ -36,7 +36,7 @@ setup(name='ftw.jsondump',
         ],
 
       keywords='ftw json representation serialize dump',
-      author='4teamwork GmbH',
+      author='4teamwork AG',
       author_email='mailto:info@4teamwork.ch',
       url='https://github.com/4teamwork/ftw.jsondump',
       license='GPL2',
