@@ -15,6 +15,7 @@ class TestFileCallback(FtwJsondumpTestCase):
         representation = getMultiAdapter((document, document.REQUEST), IJSONRepresentation)
         representation.json(file_callback=self.recording_file_callback(), filedata=False)
         self.assert_file_callback(context=document,
+                                  key='demo_file_field',
                                   fieldname='demo_file_field',
                                   data='print "Hello World"\n',
                                   filename='helloworld.py',
@@ -26,6 +27,7 @@ class TestFileCallback(FtwJsondumpTestCase):
         representation = getMultiAdapter((document, document.REQUEST), IJSONRepresentation)
         representation.json(file_callback=self.recording_file_callback(), filedata=False)
         self.assert_file_callback(context=document,
+                                  key='demo_file_blob_field',
                                   fieldname='demo_file_blob_field',
                                   data='print "Hello World"\n',
                                   filename='helloworld.py',
@@ -37,6 +39,7 @@ class TestFileCallback(FtwJsondumpTestCase):
         representation = getMultiAdapter((document, document.REQUEST), IJSONRepresentation)
         representation.json(file_callback=self.recording_file_callback(), filedata=False)
         self.assert_file_callback(context=document,
+                                  key='demo_image_field',
                                   fieldname='demo_image_field',
                                   filename='empty.gif',
                                   mimetype='image/gif')
@@ -47,6 +50,7 @@ class TestFileCallback(FtwJsondumpTestCase):
         representation = getMultiAdapter((document, document.REQUEST), IJSONRepresentation)
         representation.json(file_callback=self.recording_file_callback(), filedata=False)
         self.assert_file_callback(context=document,
+                                  key='demo_image_blob_field',
                                   fieldname='demo_image_blob_field',
                                   filename='empty.gif',
                                   mimetype='image/gif')
@@ -56,6 +60,7 @@ class TestFileCallback(FtwJsondumpTestCase):
         representation = getMultiAdapter((item, item.REQUEST), IJSONRepresentation)
         representation.json(file_callback=self.recording_file_callback(), filedata=False)
         self.assert_file_callback(context=item,
+                                  key='ftw.jsondump.tests.dxitem.IDXItemSchema.file_field',
                                   fieldname='file_field',
                                   data='print "Hello World"\n',
                                   filename='helloworld.py',
@@ -66,15 +71,17 @@ class TestFileCallback(FtwJsondumpTestCase):
         representation = getMultiAdapter((item, item.REQUEST), IJSONRepresentation)
         representation.json(file_callback=self.recording_file_callback(), filedata=False)
         self.assert_file_callback(context=item,
+                                  key='ftw.jsondump.tests.dxitem.IDXItemSchema.image_field',
                                   fieldname='image_field',
                                   filename='empty.gif',
                                   mimetype='image/gif')
 
     def recording_file_callback(self):
         self.file_callback_calls = {}
-        def file_callback(context, fieldname, data, filename, mimetype, jsondata):
+        def file_callback(context, key, fieldname, data, filename, mimetype, jsondata):
             self.file_callback_calls[fieldname] = dict(
                 context=context,
+                key=key,
                 fieldname=fieldname,
                 data=data,
                 filename=filename,

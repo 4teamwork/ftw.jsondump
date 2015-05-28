@@ -35,7 +35,7 @@ class FileFieldExtractor(object):
 
         file_callback = config.get('file_callback', None)
         if file_callback:
-            file_callback(self.context, name,
+            file_callback(self.context, name, name,
                           value.data, value.filename, mimetype,
                           data)
 
