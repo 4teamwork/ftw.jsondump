@@ -8,6 +8,7 @@ from ftw.builder import create
 from ftw.jsondump.interfaces import IJSONRepresentation
 from ftw.jsondump.representation import JSONRepresentation
 from ftw.jsondump.tests.base import FtwJsondumpTestCase
+from ftw.jsondump.tests.dxitem import IDXItemSchema
 from ftw.jsondump.tests.helpers import asset
 from ftw.jsondump.tests.helpers import asset_as_StringIO
 from ftw.testing import freeze
@@ -64,6 +65,8 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
                     dottedname_field='zope.schema.interfaces.IDottedName',
                     float_field=1.3,
                     list_field=[u'foo', u'bar', u'baz'],
+                    richtext_field=(IDXItemSchema['richtext_field'].fromUnicode(
+                        u'<p>Hello World.</p>')),
                     text_field=u'A great text.',
                     time_field=time(23, 58, 59, 1),
                     timedelta_field=timedelta(days=2, milliseconds=1, microseconds=7),

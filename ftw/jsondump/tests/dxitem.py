@@ -1,3 +1,4 @@
+from plone.app.textfield import RichText
 from plone.dexterity.content import Item
 from plone.directives.form import Schema
 from plone.namedfile.field import NamedFile
@@ -21,6 +22,7 @@ class IDXItemSchema(Schema):
     float_field = schema.Float(title=u'Float Field')
     image_field = NamedImage(title=u'Image Field')
     list_field = schema.List(title=u'List Field')
+    richtext_field = RichText(title=u'Rich Text Field')
     text_field = schema.Text(title=u'Text Field')
     time_field = schema.Time(title=u'Time Field')
     timedelta_field = schema.Timedelta(title=u'Timedelta Field')
