@@ -91,7 +91,7 @@ For doing custom things with the filedata, a callback can be used:
   from ftw.jsondump.interfaces import IJSONRepresentation
   from zope.component import getMultiAdapter
 
-  def file_callback(context, fieldname, data, filename, mimetype, jsondata):
+  def file_callback(context, key, fieldname, data, filename, mimetype, jsondata):
       with open('./tmp/' + filename, 'w+b') as target:
         target.write(data)
 

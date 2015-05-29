@@ -1,8 +1,17 @@
 Changelog
 =========
 
-1.0.1 (unreleased)
+1.1.0 (unreleased)
 ------------------
+
+- Change file_callback signature to also include the key used in the dict.
+  For dexterity content, the key is different than the fieldname because it
+  is prefixed with the interface dottedname.
+
+  - Old: ``file_callback(context, fieldname, data, filename, mimetype, jsondata)``
+  - New: ``file_callback(context, key, fieldname, data, filename, mimetype, jsondata)``
+
+  [jone]
 
 - Dexterity: support exporting RichTextValue objects.
   [jone]
