@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.0 (unreleased)
+1.1.0 (2015-10-11)
 ------------------
 
 - Change file_callback signature to also include the key used in the dict.
