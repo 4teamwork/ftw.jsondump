@@ -1,5 +1,6 @@
 from ftw.jsondump.interfaces import IPartial
 from plone.uuid.interfaces import IUUID
+from plone.uuid.interfaces import IUUIDAware
 from zope.component import adapts
 from zope.interface import implements
 from zope.interface import Interface
@@ -7,7 +8,7 @@ from zope.interface import Interface
 
 class UIDPartial(object):
     implements(IPartial)
-    adapts(Interface, Interface)
+    adapts(IUUIDAware, Interface)
 
     def __init__(self, context, request):
         self.context = context
