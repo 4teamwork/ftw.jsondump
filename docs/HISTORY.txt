@@ -4,6 +4,9 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
+- Fix error in metadata partial when owner is missing.
+  [jone]
+
 - Use UUID partial only on IUUIDAware objects.
   This allows us to dump the json of the Plone site.
   [jone]

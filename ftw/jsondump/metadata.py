@@ -19,10 +19,12 @@ class MetadataPartial(object):
         parent = aq_parent(aq_inner(self.context))
         klass = self.context.__class__
 
+        owner = self.context.getOwner()
+
         data = {'_classname': klass.__name__,
                 '_class': klass.__module__ + '.' + klass.__name__,
                 '_id': self.context.getId(),
-                '_owner': self.context.getOwner().getId(),
+                '_owner': owner and owner.getId(),
                 '_path': '/'.join(self.context.getPhysicalPath()),
                 '_type': self.context.portal_type}
 
