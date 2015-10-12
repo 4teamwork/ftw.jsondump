@@ -3,6 +3,7 @@ from ftw.jsondump.interfaces import IPartial
 from zope.component import adapts
 from zope.component import getAdapters
 from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 from zope.interface import implements
 from zope.interface import Interface
 import json
@@ -41,4 +42,6 @@ class JSONRepresentation(object):
 
     def get_selected_partials(self, names):
         for name in names:
-            yield name, getMultiAdapter((self.context, self.request), IPartial, name=name)
+            adapter = queryMultiAdapter((self.context, self.request), IPartial, name=name)
+            if adapter:
+                yield name, adapter
