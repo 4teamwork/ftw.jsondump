@@ -2,7 +2,6 @@ from ftw.jsondump.interfaces import IJSONRepresentation
 from ftw.jsondump.interfaces import IPartial
 from zope.component import adapts
 from zope.component import getAdapters
-from zope.component import getMultiAdapter
 from zope.component import queryMultiAdapter
 from zope.interface import implements
 from zope.interface import Interface
@@ -35,13 +34,15 @@ class JSONRepresentation(object):
         if not exclude:
             exclude = []
 
-        for name, partial in getAdapters((self.context, self.request), IPartial):
+        for name, partial in getAdapters((self.context, self.request),
+                                         IPartial):
             if name in exclude:
                 continue
             yield name, partial
 
     def get_selected_partials(self, names):
         for name in names:
-            adapter = queryMultiAdapter((self.context, self.request), IPartial, name=name)
+            adapter = queryMultiAdapter((self.context, self.request),
+                                        IPartial, name=name)
             if adapter:
                 yield name, adapter
