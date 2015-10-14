@@ -15,16 +15,20 @@ class PlainFieldExtractor(object):
         self.field = field
 
     def extract(self, name, data, config):
+        key = self.key(config)
         storage = self.field.interface(self.context)
         value = getattr(storage, name)
         value = self.convert(value)
-        data.update({self.key: value})
+        data.update({key: value})
 
-    @property
-    def key(self):
-        return '.'.join((
-                self.field.interface.__identifier__,
-                self.field.__name__))
+    def key(self, config):
+        if config.get('field_dottednames', True):
+            return '.'.join((
+                    self.field.interface.__identifier__,
+                    self.field.__name__))
+
+        else:
+            return self.field.__name__
 
     def convert(self, value):
         return value

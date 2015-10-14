@@ -99,6 +99,24 @@ For doing custom things with the filedata, a callback can be used:
   print json_representation.json(file_callback=file_callback)
 
 
+**Field names**
+
+By default, dexterity fields are represented with the full dottedname as key
+in order to avoid conflicts when having the same field name in multiple
+dexterity behavior schemas.
+
+Example: ``plone.app.dexterity.behaviors.metadata.IBasic.title``.
+
+This behavior can be disabled with the ``field_dottednames`` configuration option:
+
+.. code:: python
+
+  from ftw.jsondump.interfaces import IJSONRepresentation
+  from zope.component import getMultiAdapter
+
+  json_representation = getMultiAdapter((context, request), IJSONRepresentation)
+  print json_representation.json(field_dottednames=False)
+
 Creating custom partials
 ------------------------
 
