@@ -7,7 +7,7 @@ from zope.component import getMultiAdapter
 import json
 
 
-class TestArcheTypesPartial(FtwJsondumpTestCase):
+class TestDexterityFields(FtwJsondumpTestCase):
 
     def test_richtext_extrator(self):
         value = IDXItemSchema['richtext_field'].fromUnicode(u'<p>A great text.</p>')
