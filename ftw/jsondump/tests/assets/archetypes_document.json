@@ -24,19 +24,19 @@
           "actor": "test_user_1_",
           "comments": "",
           "review_state": null,
-          "time": "2010/12/28 09:55:12 UTC"},
+          "time": "2010/12/28 10:55:12 UTC"},
         {
           "action": "publish",
           "actor": "test_user_1_",
           "comments": "",
           "review_state": "publish",
-          "time": "2010/12/28 09:55:12 UTC"},
+          "time": "2010/12/28 10:55:12 UTC"},
         {
           "action": "retract",
           "actor": "test_user_1_",
           "comments": "",
           "review_state": "retract",
-          "time": "2010/12/28 09:55:12 UTC"}
+          "time": "2010/12/28 10:55:12 UTC"}
       ]
   },
   "_properties": [
@@ -51,7 +51,7 @@
   ],
   "allowDiscussion": null,
   "contributors": [],
-  "creation_date:date": "2010/12/28 09:55:12 UTC",
+  "creation_date:date": "2010/12/28 10:55:12 UTC",
   "creators": [
         "test_user_1_"
   ],
@@ -76,13 +76,13 @@
   "demo_single_ref_field:uuid": "",
   "description": "",
   "description:mimetype": "text/plain",
-  "effectiveDate:date": "2010/12/28 09:55:12 UTC",
+  "effectiveDate:date": "2010/12/28 10:55:12 UTC",
   "excludeFromNav": false,
   "expirationDate:date": "None",
   "id": "my-document",
   "language": "en",
   "location": "",
-  "modification_date:date": "2010/12/28 09:55:12 UTC",
+  "modification_date:date": "2010/12/28 10:55:12 UTC",
   "presentation": false,
   "relatedItems:path": [
         "/plone/ref-1",

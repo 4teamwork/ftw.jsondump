@@ -13,6 +13,7 @@ from ftw.jsondump.tests.helpers import asset
 from ftw.jsondump.tests.helpers import asset_as_StringIO
 from ftw.testing import freeze
 from Products.CMFCore.utils import getToolByName
+from pytz import UTC
 from zope.component import getMultiAdapter
 from zope.interface.verify import verifyClass
 import json
@@ -30,7 +31,7 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
         verifyClass(IJSONRepresentation, JSONRepresentation)
 
     def test_archetypes_document(self):
-        with freeze(datetime(2010, 12, 28, 10, 55, 12)):
+        with freeze(datetime(2010, 12, 28, 10, 55, 12, tzinfo=UTC)):
             document = create(
                 Builder('document')
                 .titled("My document")
