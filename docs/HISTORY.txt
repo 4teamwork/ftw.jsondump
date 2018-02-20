@@ -4,6 +4,9 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
+- Test against Plone 5.1.
+  [mbaechtold]
+
 - Add configuration option ``field_dottednames``
   in order to use short fieldnames.
   [jone]
