@@ -1,4 +1,5 @@
 from ftw.builder.testing import BUILDER_LAYER
+from ftw.testing import IS_PLONE_5
 from plone.app.testing import applyProfile
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import login
@@ -30,6 +31,8 @@ class FtwJsondumpLayer(PloneSandboxLayer):
         setRoles(portal, TEST_USER_ID, ['Manager'])
         login(portal, TEST_USER_NAME)
         applyProfile(portal, 'ftw.jsondump.tests:integration')
+        if IS_PLONE_5:
+            applyProfile(portal, 'plone.app.contenttypes:default')
 
 
 FTW_JSONDUMP_FIXTURE = FtwJsondumpLayer()

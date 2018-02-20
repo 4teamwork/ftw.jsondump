@@ -11,6 +11,7 @@ tests_require = [
     'ftw.builder',
     'ftw.testing',
     'path.py',
+    'plone.app.contenttypes',
     'plone.app.dexterity',
     'plone.app.testing',
     'plone.directives.form',
