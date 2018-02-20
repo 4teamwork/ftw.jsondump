@@ -11,6 +11,7 @@ from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from ftw.jsondump.tests.dxitem import IDXItemSchema
 from ftw.jsondump.tests.helpers import asset
 from ftw.jsondump.tests.helpers import asset_as_StringIO
+from ftw.testing import IS_PLONE_5
 from ftw.testing import freeze
 from Products.CMFCore.utils import getToolByName
 from pytz import UTC
@@ -120,4 +121,9 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
             obj = self.layer['app'].restrictedTraverse(path.encode('utf-8'))
             raw = raw.replace(marker, obj.UID())
 
-        return json.loads(raw)
+        value = json.loads(raw)
+
+        if name == 'dexterity_item.json' and IS_PLONE_5:
+            value['_obj_position_in_parent'] = 46
+
+        return value
