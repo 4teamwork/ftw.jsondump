@@ -6,12 +6,15 @@ from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from ftw.jsondump.tests.helpers import asset_as_StringIO
 from ftw.jsondump.tests.helpers import EMPTY_GIF_BASE64
 from ftw.jsondump.tests.helpers import HELLOWORLD_BASE64
+from ftw.testing import IS_PLONE_5
 from plone.app.testing import TEST_USER_ID
 from plone.uuid.interfaces import IUUID
+from unittest2 import skipIf
 from zope.component import getMultiAdapter
 import json
 
 
+@skipIf(IS_PLONE_5, 'We should refrain from using archetypes from Plone 5 onwards.')
 class TestArcheTypesPartial(FtwJsondumpTestCase):
 
     def get_path(self, obj):

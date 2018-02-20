@@ -4,11 +4,14 @@ from ftw.jsondump.interfaces import IJSONRepresentation
 from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from ftw.jsondump.tests.helpers import asset
 from ftw.jsondump.tests.helpers import asset_as_StringIO
+from ftw.testing import IS_PLONE_5
+from unittest2 import skipIf
 from zope.component import getMultiAdapter
 
 
 class TestFileCallback(FtwJsondumpTestCase):
 
+    @skipIf(IS_PLONE_5, 'We should refrain from using archetypes from Plone 5 onwards.')
     def test_archetypes_file_field(self):
         document = create(Builder('document')
                           .having(demo_file_field=asset_as_StringIO('helloworld.py')))
@@ -21,6 +24,7 @@ class TestFileCallback(FtwJsondumpTestCase):
                                   filename='helloworld.py',
                                   mimetype='text/x-python')
 
+    @skipIf(IS_PLONE_5, 'We should refrain from using archetypes from Plone 5 onwards.')
     def test_archetypes_file_blob_field(self):
         document = create(Builder('document')
                           .having(demo_file_blob_field=asset_as_StringIO('helloworld.py')))
@@ -33,6 +37,7 @@ class TestFileCallback(FtwJsondumpTestCase):
                                   filename='helloworld.py',
                                   mimetype='text/x-python')
 
+    @skipIf(IS_PLONE_5, 'We should refrain from using archetypes from Plone 5 onwards.')
     def test_archetypes_image_field(self):
         document = create(Builder('document')
                           .having(demo_image_field=asset_as_StringIO('empty.gif')))
@@ -44,6 +49,7 @@ class TestFileCallback(FtwJsondumpTestCase):
                                   filename='empty.gif',
                                   mimetype='image/gif')
 
+    @skipIf(IS_PLONE_5, 'We should refrain from using archetypes from Plone 5 onwards.')
     def test_archetypes_image_blob_field(self):
         document = create(Builder('document')
                           .having(demo_image_blob_field=asset_as_StringIO('empty.gif')))
