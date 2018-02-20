@@ -9,7 +9,7 @@ import json
 class TestPropertiesPartial(FtwJsondumpTestCase):
 
     def test_properties_partial(self):
-        document = create(Builder('document').titled('A Title'))
+        document = create(Builder('document').titled(u'A Title'))
 
         document.manage_addProperty('a_boolean', True, 'boolean')
         document.manage_addProperty('a_date', '2014/12/12 00:00:00 GMT+1', 'date')

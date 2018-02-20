@@ -10,7 +10,7 @@ class TestArchetypePartial(FtwJsondumpTestCase):
 
     def setUp(self):
         self.document = create(Builder('document')
-                               .titled("My document"))
+                               .titled(u"My document"))
 
     def test_partial_is_jsonseriazable(self):
         partial = getMultiAdapter((self.document, self.document.REQUEST),

@@ -18,7 +18,7 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
         return '/'.join(obj.getPhysicalPath())
 
     def test_stringfield_extrator(self):
-        title = "My document"
+        title = u"My document"
         document = create(Builder('document').titled(title))
 
         data = {}
@@ -130,9 +130,9 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
 
     def test_reference_field_extractor(self):
         ref_document1 = create(Builder('document')
-                               .titled("Ref 1"))
+                               .titled(u"Ref 1"))
         ref_document2 = create(Builder('document')
-                               .titled("Ref 2"))
+                               .titled(u"Ref 2"))
         document = create(Builder('document')
                           .having(relatedItems=[ref_document1, ref_document2]))
 
@@ -154,7 +154,7 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
 
     def test_single_reference_field_extractor(self):
         ref_document = create(Builder('document')
-                              .titled("Ref 1"))
+                              .titled(u"Ref 1"))
         document = create(Builder('document')
                           .having(demo_single_ref_field=ref_document))
 

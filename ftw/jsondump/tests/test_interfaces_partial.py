@@ -16,7 +16,7 @@ class IDummyInterface(Interface):
 class TestInterfacesPartial(FtwJsondumpTestCase):
 
     def test_interfaces_partial(self):
-        document = create(Builder('document').titled('A Title'))
+        document = create(Builder('document').titled(u'A Title'))
 
         alsoProvides(document, IDummyInterface)
 
