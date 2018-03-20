@@ -39,7 +39,6 @@
   "ftw.jsondump.tests.dxitem.IDXItemSchema.image_field:mimetype": "image/gif",
   "ftw.jsondump.tests.dxitem.IDXItemSchema.image_field:size": 42,
   "ftw.jsondump.tests.dxitem.IDXItemSchema.list_field": ["foo", "bar", "baz"],
-  "ftw.jsondump.tests.dxitem.IDXItemSchema.richtext_field": null,
   "ftw.jsondump.tests.dxitem.IDXItemSchema.richtext_field": "<p>Hello World.</p>",
   "ftw.jsondump.tests.dxitem.IDXItemSchema.richtext_field:encoding": "utf-8",
   "ftw.jsondump.tests.dxitem.IDXItemSchema.richtext_field:mimeType": "text/html",

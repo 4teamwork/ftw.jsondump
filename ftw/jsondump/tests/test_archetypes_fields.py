@@ -6,19 +6,22 @@ from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from ftw.jsondump.tests.helpers import asset_as_StringIO
 from ftw.jsondump.tests.helpers import EMPTY_GIF_BASE64
 from ftw.jsondump.tests.helpers import HELLOWORLD_BASE64
+from ftw.testing import IS_PLONE_5
 from plone.app.testing import TEST_USER_ID
 from plone.uuid.interfaces import IUUID
+from unittest2 import skipIf
 from zope.component import getMultiAdapter
 import json
 
 
+@skipIf(IS_PLONE_5, 'We should refrain from using archetypes from Plone 5 onwards.')
 class TestArcheTypesPartial(FtwJsondumpTestCase):
 
     def get_path(self, obj):
         return '/'.join(obj.getPhysicalPath())
 
     def test_stringfield_extrator(self):
-        title = "My document"
+        title = u"My document"
         document = create(Builder('document').titled(title))
 
         data = {}
@@ -130,9 +133,9 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
 
     def test_reference_field_extractor(self):
         ref_document1 = create(Builder('document')
-                               .titled("Ref 1"))
+                               .titled(u"Ref 1"))
         ref_document2 = create(Builder('document')
-                               .titled("Ref 2"))
+                               .titled(u"Ref 2"))
         document = create(Builder('document')
                           .having(relatedItems=[ref_document1, ref_document2]))
 
@@ -154,7 +157,7 @@ class TestArcheTypesPartial(FtwJsondumpTestCase):
 
     def test_single_reference_field_extractor(self):
         ref_document = create(Builder('document')
-                              .titled("Ref 1"))
+                              .titled(u"Ref 1"))
         document = create(Builder('document')
                           .having(demo_single_ref_field=ref_document))
 

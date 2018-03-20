@@ -11,9 +11,11 @@ from ftw.jsondump.tests.base import FtwJsondumpTestCase
 from ftw.jsondump.tests.dxitem import IDXItemSchema
 from ftw.jsondump.tests.helpers import asset
 from ftw.jsondump.tests.helpers import asset_as_StringIO
+from ftw.testing import IS_PLONE_5
 from ftw.testing import freeze
 from Products.CMFCore.utils import getToolByName
 from pytz import UTC
+from unittest2 import skipIf
 from zope.component import getMultiAdapter
 from zope.interface.verify import verifyClass
 import json
@@ -30,18 +32,19 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
     def test_representation_interface(self):
         verifyClass(IJSONRepresentation, JSONRepresentation)
 
+    @skipIf(IS_PLONE_5, 'We should refrain from using archetypes from Plone 5 onwards.')
     def test_archetypes_document(self):
         with freeze(datetime(2010, 12, 28, 10, 55, 12, tzinfo=UTC)):
             document = create(
                 Builder('document')
-                .titled("My document")
+                .titled(u"My document")
                 .having(text='<p>"S\xc3\xb6mesimple" <b>markup</b></p>',
                         effectiveDate=DateTime(),
                         demo_interger_field=42,
                         demo_float_field=42.0,
                         demo_fixedpoint_field="42.00",
-                        relatedItems=[create(Builder('document').titled("Ref 1")),
-                                      create(Builder('document').titled("Ref 2"))],
+                        relatedItems=[create(Builder('document').titled(u"Ref 1")),
+                                      create(Builder('document').titled(u"Ref 2"))],
                         demo_file_blob_field=asset_as_StringIO('helloworld.py'),
                         demo_image_blob_field=asset_as_StringIO('empty.gif')))
             self.wftool.doActionFor(document, 'publish')
@@ -81,14 +84,14 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
         self.assert_structure_equal(expected, data)
 
     def test_build_only_selected_partials(self):
-        document = create(Builder('document').titled("My document"))
+        document = create(Builder('document').titled(u"My document"))
         adapter = getMultiAdapter((document, document.REQUEST),
                                   IJSONRepresentation)
         data = json.loads(adapter.json(only=['interfaces', 'properties']))
         self.assertItemsEqual(['_directly_provided', '_properties'], data.keys())
 
     def test_exclude_partials(self):
-        document = create(Builder('document').titled("My document"))
+        document = create(Builder('document').titled(u"My document"))
         adapter = getMultiAdapter((document, document.REQUEST),
                                   IJSONRepresentation)
 
@@ -101,7 +104,7 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
         self.assertIn('_directly_provided', data)
 
     def test_cannot_use_only_and_exclude_simultaneously(self):
-        document = create(Builder('document').titled("My document"))
+        document = create(Builder('document').titled(u"My document"))
         adapter = getMultiAdapter((document, document.REQUEST),
                                   IJSONRepresentation)
         with self.assertRaises(ValueError) as cm:
@@ -118,4 +121,9 @@ class TestJSONRepresentation(FtwJsondumpTestCase):
             obj = self.layer['app'].restrictedTraverse(path.encode('utf-8'))
             raw = raw.replace(marker, obj.UID())
 
-        return json.loads(raw)
+        value = json.loads(raw)
+
+        if name == 'dexterity_item.json' and IS_PLONE_5:
+            value['_obj_position_in_parent'] = 46
+
+        return value
